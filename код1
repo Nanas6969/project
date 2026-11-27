@@ -1,0 +1,8 @@
+WITH duplicates AS (
+    SELECT *, COUNT(*) OVER (PARTITION BY col1, col2, col3) AS cnt
+    FROM your_table
+)
+SELECT *
+FROM duplicates
+WHERE cnt > 1
+ORDER BY col1, col2;
